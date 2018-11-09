@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import com.stock.analysis.indicators.RSIIndicator;
 import com.stock.anaysis.common.ExternalCall;
 import com.stock.anaysis.utils.AudioUtil;
 
@@ -61,6 +62,7 @@ public class MultiThreading {
 		}
 		System.out.println(stockNames.size());
 		//MultiThreading.startAnalysis(stockNames, 15);
-		ExternalCall.timeSerice("INFY.NS", "15min");
+		RSIIndicator.execute("INFY.NS", 15, 14);
+		//ExternalCall.timeSerice("INFY.NS", "15min");
 	}
 }

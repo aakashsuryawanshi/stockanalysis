@@ -22,4 +22,10 @@ public class CommonConstants {
 	public static final String intervalUrl ="&interval=";
 	public static final String outputSiceUrl = "&outputsize=";
 	public static final String keyUrl = "&apikey=";
+	
+	public static final String BUY_SIGNAL = "buy";
+	public static final String SELL_SIGNAL = "sell";
+	
+	public static final String MACD_INDICATOR = "MACD";
+	public static final String RSI_INDICATOR = "RSI";
 }
