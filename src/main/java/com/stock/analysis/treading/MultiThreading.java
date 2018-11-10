@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import com.stock.analysis.indicators.RSIIndicator;
+import com.stock.analysis.utils.AudioUtil;
 import com.stock.anaysis.common.ExternalCall;
-import com.stock.anaysis.utils.AudioUtil;
 
 public class MultiThreading {
 

@@ -10,9 +10,9 @@ import org.patriques.input.technicalindicators.TimePeriod;
 import org.patriques.output.technicalindicators.RSI;
 import org.patriques.output.technicalindicators.data.IndicatorData;
 
+import com.stock.analysis.utils.CommonUtils;
+import com.stock.analysis.utils.TimeUtils;
 import com.stock.anaysis.common.CommonConstants;
-import com.stock.anaysis.utils.CommonUtils;
-import com.stock.anaysis.utils.TimeUtils;
 
 public class RSIIndicator {
 

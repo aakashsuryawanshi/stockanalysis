@@ -15,10 +15,10 @@ import org.patriques.output.technicalindicators.MACD;
 import org.patriques.output.technicalindicators.data.MACDData;
 import org.patriques.output.timeseries.data.StockData;
 
+import com.stock.analysis.utils.AudioUtil;
+import com.stock.analysis.utils.CommonUtils;
+import com.stock.analysis.utils.TimeUtils;
 import com.stock.anaysis.common.CommonConstants;
-import com.stock.anaysis.utils.AudioUtil;
-import com.stock.anaysis.utils.CommonUtils;
-import com.stock.anaysis.utils.TimeUtils;
 
 public class MACDIndicator {
 

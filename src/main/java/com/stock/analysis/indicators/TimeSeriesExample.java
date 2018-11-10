@@ -12,8 +12,8 @@ import org.patriques.output.AlphaVantageException;
 import org.patriques.output.timeseries.IntraDay;
 import org.patriques.output.timeseries.data.StockData;
 
+import com.stock.analysis.utils.CommonUtils;
 import com.stock.anaysis.common.CommonConstants;
-import com.stock.anaysis.utils.CommonUtils;
 
 public class TimeSeriesExample {
 
