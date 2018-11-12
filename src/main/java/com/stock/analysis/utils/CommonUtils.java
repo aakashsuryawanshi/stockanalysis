@@ -4,7 +4,9 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 
@@ -12,14 +14,17 @@ import org.patriques.input.technicalindicators.Interval;
 import org.patriques.output.timeseries.data.StockData;
 
 import com.stock.analysis.entities.Company;
+import com.stock.analysis.indicators.Result;
 import com.stock.anaysis.common.CommonConstants;
 
 public class CommonUtils {
 	static Logger logger = Logger.getLogger("CommonUtils");
 	static public List<Company> companies;
+	static public Set<Result> results;
 	
 	static{
 		companies = getCompanies();
+		results = new HashSet<Result>();
 	}
 	public static void printStockData(StockData data){
 		logger.info("Time: " + data.getDateTime().toString());
@@ -117,5 +122,14 @@ public class CommonUtils {
 			e.printStackTrace();
 		}
 		return companies;
+	}
+	
+	public static Company getCompanyBySymbol(String symbol){
+		for(Company com : companies){
+			if(com.getSymbol().equals(symbol)){
+				return com;
+			}
+		}
+		return null;
 	}
 }

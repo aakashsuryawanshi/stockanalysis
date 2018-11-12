@@ -3,7 +3,9 @@ package com.stock.analysis.treading;
 import java.time.LocalDateTime;
 import java.util.Date;
 
+import com.stock.analysis.entities.Results;
 import com.stock.analysis.indicators.MACDIndicator;
+import com.stock.analysis.indicators.Result;
 
 public class StockThread extends Thread{
 
@@ -34,7 +36,15 @@ public class StockThread extends Thread{
 
 	@Override
 	public void run(){
-		macdIndicator.execute(stockName, interval, 0, 0);
+		//macdIndicator.execute(stockName, interval, 0, 0);
+		Results results = Results.getInstance();
+		Result result = macdIndicator.getMACDHist(stockName, interval);
+		if(result != null){
+			results.getResults().add(result);
+			results.printResults();
+			System.out.println();
+		}
+		
 		//System.out.println(LocalDateTime.now());
 	}
 }

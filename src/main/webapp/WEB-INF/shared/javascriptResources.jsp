@@ -5,6 +5,7 @@
 <script type="text/javascript" src="${baseFileUrl}/vendors/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
 <script type="text/javascript" src="${baseFileUrl}/vendors/angular/angular.min.js"></script>
 <script type="text/javascript" src="${baseFileUrl}/vendors/angular/angular-route.min.js"></script>
+<script type="text/javascript" src="${baseFileUrl}/vendors/underscore/underscore.js"></script>
 
 <script type="text/javascript" src="${baseFileUrl}/js/app.js"></script>
 <script type="text/javascript" src="${baseFileUrl}/js/restAPI.js"></script>

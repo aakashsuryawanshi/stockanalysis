@@ -42,12 +42,12 @@ public class RSIIndicator {
 		List<Result> results = new ArrayList<Result>();
 		for (IndicatorData d : data) {
 			if (d.getData() < oversold) {
-				Result r = new Result(symbol, CommonConstants.RSI_INDICATOR, Double.toString(d.getData()),
+				Result r = new Result(symbol, CommonConstants.RSI_INDICATOR, d.getData(),
 						TimeUtils.convertToIndianTime(d.getDateTime()), CommonConstants.BUY_SIGNAL);
 				results.add(r);
 			}
 			else if(d.getData() > overbought){
-				Result r = new Result(symbol, CommonConstants.RSI_INDICATOR, Double.toString(d.getData()),
+				Result r = new Result(symbol, CommonConstants.RSI_INDICATOR, d.getData(),
 						TimeUtils.convertToIndianTime(d.getDateTime()), CommonConstants.SELL_SIGNAL);
 				results.add(r);
 			}
