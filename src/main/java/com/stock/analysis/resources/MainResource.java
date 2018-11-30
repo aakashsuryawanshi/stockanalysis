@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ import com.stock.analysis.treading.MultiThreading;
 import com.stock.analysis.utils.CommonUtils;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping(value = "api/")
 public class MainResource {
 

@@ -4,6 +4,8 @@
 <script type="text/javascript" src="${baseFileUrl}/vendors/jquery/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="${baseFileUrl}/vendors/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
 <script type="text/javascript" src="${baseFileUrl}/vendors/angular/angular.min.js"></script>
+<script type="text/javascript" src="${baseFileUrl}/vendors/angular-selectize/angular-selectize.js"></script>
+<script type="text/javascript" src="${baseFileUrl}/vendors/angular-selectize/selectize.js"></script>
 <script type="text/javascript" src="${baseFileUrl}/vendors/angular/angular-route.min.js"></script>
 <script type="text/javascript" src="${baseFileUrl}/vendors/underscore/underscore.js"></script>
 

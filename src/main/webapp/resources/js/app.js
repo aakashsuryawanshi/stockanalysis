@@ -1,1 +1,1 @@
-var app = angular.module("stockanalysis", ['ngRoute']); 
+var app = angular.module("stockanalysis", ['ngRoute','selectize']); 

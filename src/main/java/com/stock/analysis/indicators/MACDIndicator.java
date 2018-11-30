@@ -32,6 +32,7 @@ public class MACDIndicator {
 		Result result = new Result();
 		result.setIndicator("MACD");
 		result.setSymbol(stockName);
+		result.setStockName(CommonUtils.getCompanyBySymbol(stockName).getName());
 		result.setStockValue(stockData.get(0).getClose());
 		try {
 			MACD response = technicalIndicators.macd(stockName, CommonUtils.getInterval(interval), TimePeriod.of(10),
@@ -63,6 +64,7 @@ public class MACDIndicator {
 			Result result = new Result();
 			result.setIndicator("MACD");
 			result.setSymbol(stockName);
+			result.setStockName(CommonUtils.getCompanyBySymbol(stockName).getName());
 			result.setTime(TimeUtils.convertToIndianTime(stockData.get(0).getDateTime()));
 			result.setStockValue(stockData.get(0).getClose());
 
@@ -99,7 +101,7 @@ public class MACDIndicator {
 			double size = (stockData.size() < data.size()) ? stockData.size() : data.size();
 			for (int i = ((int) size - 1); i > -1; i--) {
 				System.out.println(TimeUtils.convertToIndianTime(stockData.get(i).getDateTime()) + " "
-						+ TimeUtils.convertToIndianTime(data.get(i).getDateTime()));
+						+ data.get(i).getHist() + " " + stockData.get(i).getClose());
 				/*
 				 * if (data.get(i).getHist() > 0.1 && !buyFlag) {
 				 * System.out.println(stockName + " " +

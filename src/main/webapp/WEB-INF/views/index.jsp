@@ -6,41 +6,53 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body ng-controller="homeCtrl">
+<body ng-controller="homeCtrl" class="container">
 	<div class="row">
+		<div class="col-md-12">
+			<br>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-8">
+			<selectize options='listOfCompanies' config="selectizeConfig"
+				ng-model="selectedCompany" name='myName2'></selectize>
+		</div>
 		<div class="col-md-3">
-			<select class="form-control companyList" ng-model="selectedCompany"
-				size="30">
-				<option ng-repeat="company in listOfCompanies track by $index"
-					value="{{company.symbol}}">{{company.name}}</option>
-			</select>
 			<button ng-click="addToWatchlist()">Add To Watchlist</button>
-			<button ng-click="removeFromWatchlist()">Remove From
-				Watchlist</button>
 			<button ng-click="start()">Start</button>
 			<button ng-click="stop()">Stop</button>
+			<!-- <button ng-click="removeFromWatchlist()">Remove From
+				Watchlist</button>
 			<button ng-click="updateWatchlist()">Get Signals</button>
-			<button ng-click="stopWatchlist()">Stop Signals</button>
+			<button ng-click="stopWatchlist()">Stop Signals</button> -->
 		</div>
-		<div class="col-md-8">
+	</div>
+	<div class="row">
+		<div class="col-md-12">
 			<div class="row">
 				<br> <br> <br> <br>
 			</div>
 			<div class="row">
 				<table class="table table-bordered">
 					<tr>
-						<th>Time</th>
+						<th>Sr. No.</th>
+						<th>Symbol</th>
 						<th>Name</th>
+						<th>Time</th>
 						<th>Current Value</th>
 						<th>MACD</th>
 						<th>Signal</th>
+						<th>Delete</th>
 					</tr>
-					<tr ng-repeat="c in watchlistToShow">
-						<td>{{c.time}}</td>
+					<tr ng-repeat="c in watchlistToShow | orderBy: name track by $index">
+						<td>{{$index + 1}}</td>
 						<td>{{c.symbol}}</td>
+						<td>{{c.name}}</td>
+						<td>{{c.time}}</td>
 						<td>{{c.stockValue}}</td>
 						<td>{{c.value}}</td>
 						<td ng-class="c.signal == 'buy'? success : fail">{{c.signal}}</td>
+						<td><a href="#" ng-click="removeFromWatchlist(c.symbol)">Delete</a></td>
 					</tr>
 				</table>
 			</div>

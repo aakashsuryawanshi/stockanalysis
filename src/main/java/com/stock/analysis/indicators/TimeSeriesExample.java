@@ -13,6 +13,7 @@ import org.patriques.output.timeseries.IntraDay;
 import org.patriques.output.timeseries.data.StockData;
 
 import com.stock.analysis.utils.CommonUtils;
+import com.stock.analysis.utils.TimeUtils;
 import com.stock.anaysis.common.CommonConstants;
 
 public class TimeSeriesExample {
@@ -26,7 +27,7 @@ public class TimeSeriesExample {
 
 		try {
 			IntraDay response = stockTimeSeries.intraDay(stockName, CommonUtils.getTimeSeriesInterval(interval),
-					OutputSize.COMPACT);
+					OutputSize.FULL);
 			Map<String, String> metaData = response.getMetaData();
 			logger.info("Information: " + metaData.get("1. Information"));
 			logger.info("Stock: " + metaData.get("2. Symbol"));
@@ -41,9 +42,12 @@ public class TimeSeriesExample {
 	}
 
 	public static void main(String[] args) {
-		// TimeSeriesExample.execute();
-		MACDIndicator macd = new MACDIndicator();
-		macd.executeForHistory("INFY.NS", 15, 0, 0);
+		List<StockData> stockData = TimeSeriesExample.execute("INFY.NS", 1);
+		for(StockData data : stockData){
+			System.out.println(data.getDateTime() + " " + TimeUtils.convertToIndianTime(data.getDateTime()) + " " + data.getClose());
+		}
+		//MACDIndicator macd = new MACDIndicator();
+		//macd.executeForHistory("INFY.NS", 1, 0, 0);
 		//macd.execute("INFY.NS", 15, 0, 0);
 	}
 }

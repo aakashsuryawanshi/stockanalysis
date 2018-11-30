@@ -1,7 +1,10 @@
 package com.stock.analysis.indicators;
 
+import com.stock.analysis.utils.CommonUtils;
+
 public class Result {
 	String symbol;
+	String stockName;
 	String indicator;
 	double indicatorValue;
 	String signal;
@@ -15,6 +18,7 @@ public class Result {
 
 	public Result(String symbol, String indicator, double value, String time, String signal) {
 		this.symbol = symbol;
+		this.stockName = CommonUtils.getCompanyBySymbol(symbol).getName();
 		this.indicator = indicator;
 		this.indicatorValue = value;
 		this.time = time;
@@ -75,6 +79,22 @@ public class Result {
 
 	public void setBoughtAt(double boughtAt) {
 		this.boughtAt = boughtAt;
+	}
+	
+	public String getStockName() {
+		return stockName;
+	}
+
+	public void setStockName(String stockName) {
+		this.stockName = stockName;
+	}
+
+	public double getIndicatorValue() {
+		return indicatorValue;
+	}
+
+	public void setIndicatorValue(double indicatorValue) {
+		this.indicatorValue = indicatorValue;
 	}
 
 	@Override

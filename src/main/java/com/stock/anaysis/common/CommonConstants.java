@@ -13,7 +13,7 @@ public class CommonConstants {
 	public static final String PARAMETER_TIME = "time";
 	public static final String INDIAN_TIME = "indian time";
 	
-	public static final int HOUR_BUFFER = 9;
+	public static final int HOUR_BUFFER = 10;
 	public static final int MINUTE_BUFFER = 30;
 	
 	public static final String baseUrl = "https://www.alphavantage.co/query?";

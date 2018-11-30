@@ -37,7 +37,7 @@ public class MultiThreading {
 		
 		try{
 			int index = 0;
-			while(startStopFlag){
+			while(startStopFlag && (index < threads.size() -1)){
 				threads.get(index).run();
 				threads.get(index+1).run();
 				System.out.println();

@@ -8,28 +8,49 @@ app.controller("homeCtrl", [ "$scope", "restApi", function($scope, restApi) {
 	}
 	$scope.init();
 
+	$scope.selectizeConfig = {
+		    maxItems: 5,
+		  	labelField: 'name',
+		  	searchField: ['name'],
+		  	valueField: 'symbol'
+		  };
+	
 	$scope.addToWatchlist = function() {
-		restApi.addToWatchList($scope.selectedCompany).then(function(data) {
-			console.log(data);
+		_.forEach($scope.selectedCompany, function(selectedC){
+			restApi.addToWatchList(selectedC).then(function(data) {
+				console.log(data);
+				$scope.watchlistToShow = convertToSignal(data.data.list);
+			});
 		});
 	}
 
-	$scope.removeFromWatchlist = function() {
-		restApi.removeToWatchList($scope.selectedCompany).then(function(data) {
+	$scope.removeFromWatchlist = function(symbol) {
+		restApi.removeToWatchList(symbol).then(function(data) {
 			console.log(data);
+			$scope.watchlistToShow = convertToSignal(data.data.list);
 		});
 	}
 
 	$scope.start = function() {
 		restApi.startSniper().then(function(data) {
+			console.log(data);
 			$scope.listOfCompanies = data.data;
+		},
+		function(data){
+			console.log(data);
 		});
+		$scope.updateWatchlist();
 	}
 
 	$scope.stop = function() {
 		restApi.stopSniper().then(function(data) {
+			console.log(data);
 			$scope.listOfCompanies = data.data;
+		},
+		function(data){
+			console.log(data);
 		});
+		$scope.stopWatchlist();
 	}
 
 	$scope.getSignals = function() {
@@ -40,18 +61,32 @@ app.controller("homeCtrl", [ "$scope", "restApi", function($scope, restApi) {
 			}
 		});
 	}
+	
+	var convertToSignal = function(list){
+		var result = [];
+		_.forEach(list, function(item){
+			var obj = {};
+			obj.time = "";
+			obj.value = "";
+			obj.name = item.name;
+			obj.symbol = item.symbol;
+			obj.stockValue = "";
+			result.push(obj);
+		});
+		return result;
+	}
 	var compareValues = function(oldValues, newValues){
 		_.forEach(oldValues, function(oldV){
 			_.forEach(newValues, function(newV){
 				if(oldV.symbol == newV.symbol && oldV.signal != newV.signal){
 					if(newV.signal == 'buy'){
-						
+						createSound(340);
 					}
 					else{
-						createSound();
+						createSound(440);
 					}
 				}
-				createSound(440);
+				//createSound(440);
 			});
 		});
 		return newValues;
