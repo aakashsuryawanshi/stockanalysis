@@ -12,8 +12,18 @@ public class Result {
 	double stockValue;
 	double boughtAt;
 
-	public Result() {
-
+	public Result(){
+		
+	}
+	public Result(Result that) {
+		this.symbol = that.symbol;
+		this.stockName = that.stockName;
+		this.indicator = that.indicator;
+		this.indicatorValue = that.indicatorValue;
+		this.signal = that.signal;
+		this.time = that.time;
+		this.stockValue = that.stockValue;
+		this.boughtAt = that.boughtAt;
 	}
 
 	public Result(String symbol, String indicator, double value, String time, String signal) {

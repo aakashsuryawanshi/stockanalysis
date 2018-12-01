@@ -51,7 +51,7 @@
 						<td>{{c.time}}</td>
 						<td>{{c.stockValue}}</td>
 						<td>{{c.value}}</td>
-						<td ng-class="c.signal == 'buy'? success : fail">{{c.signal}}</td>
+						<td ng-class="{success: c.signal == 'buy', fail: c.signal == 'sell'}">{{c.signal}}</td>
 						<td><a href="#" ng-click="removeFromWatchlist(c.symbol)">Delete</a></td>
 					</tr>
 				</table>

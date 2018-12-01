@@ -1,5 +1,6 @@
 package com.stock.analysis.resources;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -14,6 +15,7 @@ import com.stock.analysis.entities.Company;
 import com.stock.analysis.entities.Results;
 import com.stock.analysis.entities.WatchList;
 import com.stock.analysis.indicators.Result;
+import com.stock.analysis.record.RecordTransactions;
 import com.stock.analysis.treading.MultiThreading;
 import com.stock.analysis.utils.CommonUtils;
 
@@ -59,6 +61,11 @@ public class MainResource {
 	@RequestMapping(value = "/getSignals", method = RequestMethod.GET)
 	public Set<Result> getSignals() {
 		Results results = Results.getInstance();
+		List<Result> result = new ArrayList<>();
+		for(Result re : results.getResults()){
+			result.add(new Result(re));
+		}
+		RecordTransactions.updateProfit(result);
 		return results.getResults();
 	}
 

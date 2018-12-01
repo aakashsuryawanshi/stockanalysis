@@ -32,7 +32,7 @@ public class MACDIndicator {
 		Result result = new Result();
 		result.setIndicator("MACD");
 		result.setSymbol(stockName);
-		result.setStockName(CommonUtils.getCompanyBySymbol(stockName).getName());
+		result.setStockName(CommonUtils.getCompanyBySymbol(stockName.substring(0, stockName.lastIndexOf("."))).getName());
 		result.setStockValue(stockData.get(0).getClose());
 		try {
 			MACD response = technicalIndicators.macd(stockName, CommonUtils.getInterval(interval), TimePeriod.of(10),
@@ -64,7 +64,7 @@ public class MACDIndicator {
 			Result result = new Result();
 			result.setIndicator("MACD");
 			result.setSymbol(stockName);
-			result.setStockName(CommonUtils.getCompanyBySymbol(stockName).getName());
+			result.setStockName(CommonUtils.getCompanyBySymbol(stockName.substring(0, stockName.lastIndexOf("."))).getName());
 			result.setTime(TimeUtils.convertToIndianTime(stockData.get(0).getDateTime()));
 			result.setStockValue(stockData.get(0).getClose());
 
