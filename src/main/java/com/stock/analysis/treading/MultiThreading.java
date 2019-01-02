@@ -37,15 +37,24 @@ public class MultiThreading {
 		
 		try{
 			int index = 0;
-			while(startStopFlag && (index < threads.size() -1)){
+			while(startStopFlag){
 				threads.get(index).run();
-				threads.get(index+1).run();
-				System.out.println();
-				TimeUnit.MINUTES.sleep(1);
-				if(index == threads.size()-2){
+				index++;
+				if(index == threads.size()){
 					index = 0;
 				}
-				index += 2;
+				if(index != 0 && (index%5 ==0)){
+					TimeUnit.MINUTES.sleep(1);
+				}
+				/*threads.get(index+1).run();
+				threads.get(index+2).run();
+				threads.get(index+3).run();
+				System.out.println();
+				TimeUnit.MINUTES.sleep(1);
+				if(index == threads.size()-4){
+					index = 0;
+				}
+				index += 4;*/
 			}
 		}
 		catch(Exception e){

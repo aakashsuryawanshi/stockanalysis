@@ -21,7 +21,7 @@ public class TimeSeriesExample {
 	static Logger logger = Logger.getLogger("TimeSeriesExample");
 
 	public static List<StockData> execute(String stockName, int interval) {
-		AlphaVantageConnector apiConnector = new AlphaVantageConnector(CommonConstants.API_KEY,
+		AlphaVantageConnector apiConnector = new AlphaVantageConnector(CommonConstants.API_KEY_2,
 				CommonConstants.TIME_OUT);
 		TimeSeries stockTimeSeries = new TimeSeries(apiConnector);
 

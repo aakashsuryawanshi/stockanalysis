@@ -44,14 +44,17 @@
 						<th>Signal</th>
 						<th>Delete</th>
 					</tr>
-					<tr ng-repeat="c in watchlistToShow | orderBy: name track by $index">
+					<tr
+						ng-repeat="c in watchlistToShow | orderBy: name track by $index"
+						ng-class="{changed: c.changed != undefined && c.changed == 1, notchanged: c.changed != undefined && c.changed == 0}">
 						<td>{{$index + 1}}</td>
 						<td>{{c.symbol}}</td>
 						<td>{{c.name}}</td>
 						<td>{{c.time}}</td>
 						<td>{{c.stockValue}}</td>
 						<td>{{c.value}}</td>
-						<td ng-class="{success: c.signal == 'buy', fail: c.signal == 'sell'}">{{c.signal}}</td>
+						<td
+							ng-class="{success: c.signal == 'buy', fail: c.signal == 'sell'}">{{c.signal}}</td>
 						<td><a href="#" ng-click="removeFromWatchlist(c.symbol)">Delete</a></td>
 					</tr>
 				</table>

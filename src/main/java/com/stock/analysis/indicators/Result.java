@@ -7,6 +7,7 @@ public class Result {
 	String stockName;
 	String indicator;
 	double indicatorValue;
+	int changed = 0;
 	String signal;
 	String time;
 	double stockValue;
@@ -107,6 +108,13 @@ public class Result {
 		this.indicatorValue = indicatorValue;
 	}
 
+	
+	public int getChanged() {
+		return changed;
+	}
+	public void setChanged(int changed) {
+		this.changed = changed;
+	}
 	@Override
 	public boolean equals(Object obj) {
 		if (((Result) obj).symbol.equalsIgnoreCase(this.symbol)

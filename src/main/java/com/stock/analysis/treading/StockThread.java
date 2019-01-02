@@ -40,6 +40,9 @@ public class StockThread extends Thread{
 		Results results = Results.getInstance();
 		Result result = macdIndicator.getMACDHist(stockName, interval);
 		if(result != null){
+			if(results.getResults().contains(result)){
+				results.getResults().remove(result);
+			}
 			results.getResults().add(result);
 			results.printResults();
 			System.out.println();

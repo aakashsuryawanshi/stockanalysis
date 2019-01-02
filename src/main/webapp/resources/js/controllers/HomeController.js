@@ -85,6 +85,10 @@ app.controller("homeCtrl", [ "$scope", "restApi", function($scope, restApi) {
 					else{
 						createSound(440);
 					}
+					newV.changed = 1;
+				}
+				else{
+					newV.changed = 0;
 				}
 				//createSound(440);
 			});
@@ -102,7 +106,7 @@ app.controller("homeCtrl", [ "$scope", "restApi", function($scope, restApi) {
 		osc.stop(context.currentTime + 1);
 	}
 	$scope.updateWatchlist = function() {
-		$scope.watchInterval = setInterval(function(){ $scope.getSignals(); }, 3000);
+		$scope.watchInterval = setInterval(function(){ $scope.getSignals(); }, 30000);
 		//$scope.getSignals();
 	}
 	

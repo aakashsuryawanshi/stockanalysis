@@ -65,18 +65,34 @@ public class MACDIndicator {
 			result.setIndicator("MACD");
 			result.setSymbol(stockName);
 			result.setStockName(CommonUtils.getCompanyBySymbol(stockName.substring(0, stockName.lastIndexOf("."))).getName());
-			result.setTime(TimeUtils.convertToIndianTime(stockData.get(0).getDateTime()));
-			result.setStockValue(stockData.get(0).getClose());
-
-			MACD response = technicalIndicators.macd(stockName, CommonUtils.getInterval(interval), TimePeriod.of(10),
-					SeriesType.CLOSE, FastPeriod.of(12), SlowPeriod.of(26), SignalPeriod.of(9));
-			List<MACDData> data = response.getData();
-			if (data.get(0).getHist() > 0.1) {
+			if(stockData != null && stockData.size() > 0){
+				result.setTime(TimeUtils.convertToIndianTime(stockData.get(0).getDateTime()));
+				result.setStockValue(stockData.get(0).getClose());
+			}
+			else{
+				System.out.println("Stock Data is Empty at MACDIndicator line no. 73");
+			}
+			MACD response = null;
+			if(CommonUtils.getInterval(interval) != null && technicalIndicators != null && stockName != null){
+				response = technicalIndicators.macd(stockName, CommonUtils.getInterval(interval), TimePeriod.of(10),
+						SeriesType.CLOSE, FastPeriod.of(12), SlowPeriod.of(26), SignalPeriod.of(9));
+			}
+			else{
+				System.out.println("Time Interval is null at MACDIndicator line no 81");
+			}
+			List<MACDData> data = null;
+			if(response != null){
+				data = response.getData();
+			}
+			if (data != null && data.size()> 0 && data.get(0).getHist() > 0.0) {
 				result.setValue(data.get(0).getHist());
 				result.setSignal("buy");
-			} else if (data.get(0).getHist() < 0.1) {
+			} else if (data != null && data.size() > 0 && data.get(0).getHist() <= 0.0) {
 				result.setValue(data.get(0).getHist());
 				result.setSignal("sell");
+			}
+			else if(data == null || data.size() == 0){
+				System.out.println("MACD Data is empty at line MACDIndicator line no 86");
 			}
 			return result;
 

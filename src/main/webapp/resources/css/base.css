@@ -4,9 +4,17 @@
 }
 
 .success{
-	background-color: green;
+	background-color: #00bf00;
 }
 
 .fail{
 	background-color: red;
+}
+
+.changed{
+	background-color: #ffff00;
+}
+
+.notchanged{
+	background-color: #ffffff;
 }

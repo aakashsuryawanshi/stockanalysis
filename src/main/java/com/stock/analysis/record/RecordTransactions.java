@@ -21,19 +21,20 @@ public class RecordTransactions {
 		for (Result oldResult : previousResults) {
 			for (Result newResult : results) {
 				if (oldResult.getSymbol().equalsIgnoreCase(newResult.getSymbol())) {
-					if (oldResult.getSignal().equalsIgnoreCase("buy") && newResult.getSignal().equalsIgnoreCase("sell")) {
-						profit += newResult.getValue() - oldResult.getValue();
+					if (oldResult.getSignal().equalsIgnoreCase("buy") && newResult.getSignal().equalsIgnoreCase("sell")
+							&& newResult.getStockValue() > oldResult.getStockValue()) {
+						profit += newResult.getStockValue() - oldResult.getStockValue();
 					}
 				}
 			}
-			if(oldResult.getSymbol().equalsIgnoreCase("profit")){
-				profit += oldResult.getValue();
+			if (oldResult.getSymbol().equalsIgnoreCase("profit")) {
+				profit += oldResult.getStockValue();
 			}
 		}
 		Result profitResult = new Result();
 		profitResult.setSymbol("Profit");
 		profitResult.setSignal("Buy");
-		profitResult.setValue(profit);
+		profitResult.setStockValue(profit);
 		results.add(profitResult);
 		writeToFile(results);
 	}
@@ -48,7 +49,7 @@ public class RecordTransactions {
 				String[] elements = item.split(",");
 				Result result = new Result();
 				result.setSymbol(elements[0]);
-				result.setValue(Double.parseDouble(elements[1]));
+				result.setStockValue(Double.parseDouble(elements[1]));
 				result.setSignal(elements[2]);
 				results.add(result);
 			}
@@ -57,19 +58,23 @@ public class RecordTransactions {
 		}
 		return results;
 	}
-	
-	public static void writeToFile(List<Result> results){
+
+	public static void writeToFile(List<Result> results) {
 		Path path = Paths.get("E:\\work\\Workspace\\analysis\\configs\\data\\records.csv");
-		 
-		try (BufferedWriter writer = Files.newBufferedWriter(path))
-		{
-			for(Result result : results){
-				if(result.getSignal().equalsIgnoreCase("buy") || result.getSymbol().equalsIgnoreCase("profit")){
-					writer.write(result.getSymbol() + "," + result.getStockValue() + "," + result.getSignal()+ "\n");
+
+		try (BufferedWriter writer = Files.newBufferedWriter(path)) {
+			for (Result result : results) {
+				if (result.getSignal() != null && result.getSymbol() != null) {
+					if (result.getSignal().equalsIgnoreCase("buy") || result.getSymbol().equalsIgnoreCase("profit")) {
+						writer.write(
+								result.getSymbol() + "," + result.getStockValue() + "," + result.getSignal() + "\n");
+					}
+				}
+				else{
+					System.out.println("Fields in result empty at RecordTraction line no. 73");
 				}
 			}
-		}
-		catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
