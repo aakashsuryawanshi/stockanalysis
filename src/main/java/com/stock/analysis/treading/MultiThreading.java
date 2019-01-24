@@ -43,14 +43,14 @@ public class MultiThreading {
 				if(index == threads.size()){
 					index = 0;
 				}
-				if(index != 0 && (index%5 ==0)){
-					TimeUnit.MINUTES.sleep(1);
+				if(index != 0 && (index%10 ==0)){
+					TimeUnit.SECONDS.sleep(60);
 				}
 				/*threads.get(index+1).run();
 				threads.get(index+2).run();
 				threads.get(index+3).run();
 				System.out.println();
-				TimeUnit.MINUTES.sleep(1);
+				TimeUnit.SECONDS.sleep(10);
 				if(index == threads.size()-4){
 					index = 0;
 				}
@@ -88,6 +88,7 @@ public class MultiThreading {
 		System.out.println(stockNames.size());
 		MultiThreading mult = MultiThreading.getInstance();
 		mult.setStartStopFlag(true);
+		//new StockThread().generateResult();
 		mult.startAnalysis(stockNames, 15);
 		//RSIIndicator.execute("INFY.NS", 15, 14);
 		//ExternalCall.timeSerice("INFY.NS", "15min");

@@ -102,8 +102,8 @@ app.controller("homeCtrl", [ "$scope", "restApi", function($scope, restApi) {
 		osc.type = 'square';//'sine'; // this is the default - also square, sawtooth, triangle
 		osc.frequency.value = freq; // Hz
 		osc.connect(context.destination); // connect it to the destination
-		osc.start(); // start the oscillator
-		osc.stop(context.currentTime + 1);
+		//osc.start(); // start the oscillator
+		//osc.stop(context.currentTime + 1);
 	}
 	$scope.updateWatchlist = function() {
 		$scope.watchInterval = setInterval(function(){ $scope.getSignals(); }, 30000);

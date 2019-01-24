@@ -15,10 +15,12 @@ import org.patriques.output.technicalindicators.MACD;
 import org.patriques.output.technicalindicators.data.MACDData;
 import org.patriques.output.timeseries.data.StockData;
 
+import com.stock.analysis.entities.MACDInfo;
 import com.stock.analysis.utils.AudioUtil;
 import com.stock.analysis.utils.CommonUtils;
 import com.stock.analysis.utils.TimeUtils;
 import com.stock.anaysis.common.CommonConstants;
+import com.stock.anaysis.common.ExternalCall;
 
 public class MACDIndicator {
 
@@ -140,4 +142,39 @@ public class MACDIndicator {
 			System.out.println("something went wrong");
 		}
 	}
+	
+	public Result getMACDHistCustom(String stockName, int interval) {
+		try {
+			Result result = new Result();
+			result.setIndicator("MACD");
+			result.setSymbol(stockName);
+			//result.setStockName(CommonUtils.getCompanyBySymbol(stockName).getName());
+			result.setStockName(CommonUtils.getCompanyBySymbol(stockName.substring(0, stockName.lastIndexOf("."))).getName());
+			com.stock.analysis.entities.StockData stockData = ExternalCall.latestValue(stockName, interval + "min");
+			if(stockData != null){
+				result.setTime(TimeUtils.convertToIndianTime(stockData.getTimestamp()));
+				result.setStockValue(stockData.getClose());
+			}
+			else{
+				System.out.println("Stock Data is Empty at MACDIndicator line no. 73");
+			}
+			MACDInfo data = ExternalCall.macdLatest(stockName, interval + "min");
+			if (data != null && data.getHist() > 0.01) {
+				result.setValue(data.getHist());
+				result.setSignal("buy");
+			} else if (data != null && data.getHist() <= 0.01) {
+				result.setValue(data.getHist());
+				result.setSignal("sell");
+			}
+			else if(data == null){
+				System.out.println("MACD Data is empty at line MACDIndicator line no 86");
+			}
+			return result;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

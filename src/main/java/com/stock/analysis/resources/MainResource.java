@@ -38,7 +38,7 @@ public class MainResource {
 			}
 			MultiThreading multiThreading = MultiThreading.getInstance();
 			multiThreading.setStartStopFlag(true);
-			multiThreading.startAnalysis(symbols, 1);
+			multiThreading.startAnalysis(symbols, 5);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();

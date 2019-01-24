@@ -45,7 +45,7 @@
 						<th>Delete</th>
 					</tr>
 					<tr
-						ng-repeat="c in watchlistToShow | orderBy: name track by $index"
+						ng-repeat="c in watchlistToShow | orderBy: c.symbol track by $index"
 						ng-class="{changed: c.changed != undefined && c.changed == 1, notchanged: c.changed != undefined && c.changed == 0}">
 						<td>{{$index + 1}}</td>
 						<td>{{c.symbol}}</td>

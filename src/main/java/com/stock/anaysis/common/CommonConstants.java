@@ -1,8 +1,8 @@
 package com.stock.anaysis.common;
 
 public class CommonConstants {
-
-	public static final String API_KEY = "ZK58MA9LJ3W2OJKA";
+	
+	public static final String API_KEY_1 = "ZK58MA9LJ3W2OJKA";
 	public static final String API_KEY_2 = "VP5UMYZGXUTAFLPP";
 	public static final int TIME_OUT = 6000;
 	

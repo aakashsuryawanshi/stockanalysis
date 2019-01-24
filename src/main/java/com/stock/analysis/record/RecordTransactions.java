@@ -17,18 +17,24 @@ public class RecordTransactions {
 
 	public static void updateProfit(List<Result> results) {
 		List<Result> previousResults = readFromFile();
+		List<Result> newResults = readFromFile();
 		double profit = 0;
 		for (Result oldResult : previousResults) {
+			boolean found = false;
 			for (Result newResult : results) {
 				if (oldResult.getSymbol().equalsIgnoreCase(newResult.getSymbol())) {
 					if (oldResult.getSignal().equalsIgnoreCase("buy") && newResult.getSignal().equalsIgnoreCase("sell")
 							&& newResult.getStockValue() > oldResult.getStockValue()) {
 						profit += newResult.getStockValue() - oldResult.getStockValue();
 					}
+					found = true;
 				}
 			}
 			if (oldResult.getSymbol().equalsIgnoreCase("profit")) {
 				profit += oldResult.getStockValue();
+			}
+			if(!found){
+				newResults.add(oldResult);
 			}
 		}
 		Result profitResult = new Result();
