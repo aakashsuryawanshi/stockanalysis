@@ -65,7 +65,7 @@ public class MainResource {
 		for(Result re : results.getResults()){
 			result.add(new Result(re));
 		}
-		RecordTransactions.updateProfit(result);
+		//RecordTransactions.updateProfit(result);
 		return results.getResults();
 	}
 

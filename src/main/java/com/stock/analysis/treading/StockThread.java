@@ -1,7 +1,9 @@
 package com.stock.analysis.treading;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import com.stock.analysis.entities.Results;
@@ -41,7 +43,7 @@ public class StockThread extends Thread{
 	public void run(){
 		//macdIndicator.execute(stockName, interval, 0, 0);
 		Results results = Results.getInstance();
-		Result result = /*generateResult();*/macdIndicator.getMACDHistCustom(stockName, interval);
+		Result result = generateResult();//macdIndicator.getMACDHistCustom(stockName, interval);
 		if(result != null){
 			if(results.getResults().contains(result)){
 				results.getResults().remove(result);
@@ -49,7 +51,13 @@ public class StockThread extends Thread{
 			results.getResults().add(result);
 			results.printResults();
 			System.out.println();
-			new MainResource().getSignals();
+			Results results1 = Results.getInstance();
+			List<Result> result1 = new ArrayList<>();
+			for(Result re : results1.getResults()){
+				result1.add(new Result(re));
+			}
+			//RecordTransactions.updateProfit(result1);
+			RecordTransactions.updateResult(result1);
 		}
 		
 		//System.out.println(LocalDateTime.now());

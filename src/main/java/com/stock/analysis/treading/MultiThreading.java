@@ -43,7 +43,7 @@ public class MultiThreading {
 				if(index == threads.size()){
 					index = 0;
 				}
-				if(index != 0 && (index%10 ==0)){
+				if(index != 0 && (index%5 ==0)){
 					TimeUnit.SECONDS.sleep(60);
 				}
 				/*threads.get(index+1).run();

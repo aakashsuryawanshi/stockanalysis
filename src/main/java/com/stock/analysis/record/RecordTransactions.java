@@ -45,6 +45,48 @@ public class RecordTransactions {
 		writeToFile(results);
 	}
 
+	public static void updateResult(List<Result> newResults){
+		List<Result> oldResults = readFromFile();
+		List<Result> updated = new ArrayList<Result>();
+		double profit = 0.0d;
+		for(Result oldR : oldResults){
+			boolean found = false;
+			for(Result newR : newResults){
+				if(!oldR.getSymbol().equalsIgnoreCase("Profit") && oldR.getSymbol().equalsIgnoreCase(newR.getSymbol())){
+					found = true;
+					if(oldR.getSignal().equalsIgnoreCase("buy") && newR.getSignal().equalsIgnoreCase("buy")){
+						updated.add(oldR);
+					}
+					else if(oldR.getSignal().equalsIgnoreCase("buy") && newR.getSignal().equalsIgnoreCase("sell")){
+						profit += newR.getStockValue();
+					}
+				}
+			}
+			if(!oldR.getSymbol().equalsIgnoreCase("Profit") && !found){
+				updated.add(oldR);
+			}
+			if(oldR.getSymbol().equalsIgnoreCase("Profit")){
+				profit += oldR.getStockValue();
+			}
+		}
+		for(Result newR : newResults){
+			boolean found = false;
+			for(Result oldR : oldResults){
+				if(oldR.getSymbol().equalsIgnoreCase(newR.getSymbol())){
+					found = true;
+				}
+			}
+			if(!found && newR.getSignal().equalsIgnoreCase("buy")){
+				updated.add(newR);
+			}
+		}
+		Result profitResult = new Result();
+		profitResult.setSymbol("Profit");
+		profitResult.setSignal("Buy");
+		profitResult.setStockValue(profit);
+		updated.add(profitResult);
+		writeToFile(updated);
+	}
 	public static List<Result> readFromFile() {
 		String fileName = "E:\\work\\Workspace\\analysis\\configs\\data\\records.csv";
 		List<String> list = new ArrayList<>();
