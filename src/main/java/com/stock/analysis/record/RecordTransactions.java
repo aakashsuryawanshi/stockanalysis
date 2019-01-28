@@ -33,7 +33,7 @@ public class RecordTransactions {
 			if (oldResult.getSymbol().equalsIgnoreCase("profit")) {
 				profit += oldResult.getStockValue();
 			}
-			if(!found){
+			if (!found) {
 				newResults.add(oldResult);
 			}
 		}
@@ -45,38 +45,39 @@ public class RecordTransactions {
 		writeToFile(results);
 	}
 
-	public static void updateResult(List<Result> newResults){
+	public static void updateResult(List<Result> newResults) {
 		List<Result> oldResults = readFromFile();
 		List<Result> updated = new ArrayList<Result>();
 		double profit = 0.0d;
-		for(Result oldR : oldResults){
+		for (Result oldR : oldResults) {
 			boolean found = false;
-			for(Result newR : newResults){
-				if(!oldR.getSymbol().equalsIgnoreCase("Profit") && oldR.getSymbol().equalsIgnoreCase(newR.getSymbol())){
+			for (Result newR : newResults) {
+				if (!oldR.getSymbol().equalsIgnoreCase("Profit")
+						&& oldR.getSymbol().equalsIgnoreCase(newR.getSymbol())) {
 					found = true;
-					if(oldR.getSignal().equalsIgnoreCase("buy") && newR.getSignal().equalsIgnoreCase("buy")){
+					if (oldR.getSignal().equalsIgnoreCase("buy") && newR.getSignal().equalsIgnoreCase("buy")) {
 						updated.add(oldR);
-					}
-					else if(oldR.getSignal().equalsIgnoreCase("buy") && newR.getSignal().equalsIgnoreCase("sell")){
+					} else if (oldR.getSignal().equalsIgnoreCase("buy") && newR.getSignal().equalsIgnoreCase("sell")
+							&& newR.getStockValue() > oldR.getStockValue()) {
 						profit += newR.getStockValue();
 					}
 				}
 			}
-			if(!oldR.getSymbol().equalsIgnoreCase("Profit") && !found){
+			if (!oldR.getSymbol().equalsIgnoreCase("Profit") && !found) {
 				updated.add(oldR);
 			}
-			if(oldR.getSymbol().equalsIgnoreCase("Profit")){
+			if (oldR.getSymbol().equalsIgnoreCase("Profit")) {
 				profit += oldR.getStockValue();
 			}
 		}
-		for(Result newR : newResults){
+		for (Result newR : newResults) {
 			boolean found = false;
-			for(Result oldR : oldResults){
-				if(oldR.getSymbol().equalsIgnoreCase(newR.getSymbol())){
+			for (Result oldR : oldResults) {
+				if (oldR.getSymbol().equalsIgnoreCase(newR.getSymbol())) {
 					found = true;
 				}
 			}
-			if(!found && newR.getSignal().equalsIgnoreCase("buy")){
+			if (!found && newR.getSignal().equalsIgnoreCase("buy")) {
 				updated.add(newR);
 			}
 		}
@@ -87,6 +88,7 @@ public class RecordTransactions {
 		updated.add(profitResult);
 		writeToFile(updated);
 	}
+
 	public static List<Result> readFromFile() {
 		String fileName = "E:\\work\\Workspace\\analysis\\configs\\data\\records.csv";
 		List<String> list = new ArrayList<>();
@@ -117,8 +119,7 @@ public class RecordTransactions {
 						writer.write(
 								result.getSymbol() + "," + result.getStockValue() + "," + result.getSignal() + "\n");
 					}
-				}
-				else{
+				} else {
 					System.out.println("Fields in result empty at RecordTraction line no. 73");
 				}
 			}
