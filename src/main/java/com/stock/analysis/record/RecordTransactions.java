@@ -57,9 +57,14 @@ public class RecordTransactions {
 					found = true;
 					if (oldR.getSignal().equalsIgnoreCase("buy") && newR.getSignal().equalsIgnoreCase("buy")) {
 						updated.add(oldR);
-					} else if (oldR.getSignal().equalsIgnoreCase("buy") && newR.getSignal().equalsIgnoreCase("sell")
+					}
+					else if (oldR.getSignal().equalsIgnoreCase("buy") && newR.getSignal().equalsIgnoreCase("sell")
 							&& newR.getStockValue() > oldR.getStockValue()) {
-						profit += newR.getStockValue();
+						profit += (newR.getStockValue() - oldR.getStockValue());
+					}
+					else if(oldR.getSignal().equalsIgnoreCase("buy") && newR.getSignal().equalsIgnoreCase("sell")
+							&& newR.getStockValue() < oldR.getStockValue()){
+						found = false;
 					}
 				}
 			}
